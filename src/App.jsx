@@ -13,7 +13,8 @@ function App() {
   ];
 
   const [randomList, setRandomList] = useState([]);
-  const [counter, setCounter] = useState(0);
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   const initializeRandomList = async () => {
     const newList = [];
@@ -26,8 +27,12 @@ function App() {
         clicked: false,
       });
     }
-    console.log(newList);
-    setRandomList(newList);
+    randomizeList(newList);
+  };
+
+  const resetList = () => {
+    const resetList = randomList.map((anime) => ({ ...anime, clicked: false }));
+    randomizeList(resetList);
   };
 
   const randomizeList = (list) => {
@@ -42,33 +47,23 @@ function App() {
     setRandomList(shuffledArray);
   };
 
-  //Returns false if the card is not yet clicked and true otherwise
-  const checkMemory = (index) => {
-    if (randomList[index].clicked === false) {
-      return false;
-    }
-    return true;
-  };
-
-  const storeMemory = (targetIndex) => {
-    setRandomList((prevList) => {
-      const updatedList = prevList.map((anime, index) =>
-        index === targetIndex ? { ...anime, clicked: true } : anime
-      );
-      console.log(updatedList);
-      return updatedList;
-    });
-  };
-
-  const handleClick = (index) => {
-    if (checkMemory(index) === false) {
-      storeMemory(index);
-      setCounter(counter + 1);
+  const handleClick = (targetIndex) => {
+    if (randomList[targetIndex].clicked) {
+      setBestScore(score);
+      setScore(0);
+      setBestScore(Math.max(bestScore, score));
+      resetList();
     } else {
-      setCounter(0);
+      setRandomList((prevList) => {
+        const updatedList = prevList.map((anime, index) =>
+          index === targetIndex ? { ...anime, clicked: true } : anime
+        );
+        setScore(score + 1);
+        randomizeList(updatedList);
+        console.log(updatedList);
+        return updatedList;
+      });
     }
-    randomizeList(randomList);
-    console.log("Score: ", counter);
   };
 
   const getAnimePoster = async (titleQuery) => {
@@ -90,7 +85,7 @@ function App() {
         throw new Error("No anime found for the given title.");
       }
       const id = animeData.data[0].id;
-      const poster = animeData.data[0].attributes.posterImage.medium;
+      const poster = animeData.data[0].attributes.posterImage.small;
 
       return { id, poster };
     } catch (error) {
@@ -104,16 +99,21 @@ function App() {
   }, []);
 
   return (
-    <div className="cards">
-      {randomList?.map((anime, index) => (
-        <Card
-          key={anime.id}
-          title={anime.title}
-          poster={anime.poster}
-          handleClick={() => handleClick(index)}
-        />
-      ))}
-    </div>
+    <>
+      <span>
+        Best Score: {bestScore} Current Score: {score}
+      </span>
+      <div className="cards">
+        {randomList?.map((anime, index) => (
+          <Card
+            key={anime.id}
+            title={anime.title}
+            poster={anime.poster}
+            handleClick={() => handleClick(index)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
