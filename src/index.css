@@ -7,4 +7,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --primary-color: #ca282c;
+  --secondary-color: #e89c1e;
 }

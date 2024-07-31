@@ -1,0 +1,29 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.card {
+  width: 300px;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.card-image {
+  background-color: antiquewhite;
+  height: 250px;
+  border-radius: 10px;
+}
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card h2 {
+  font-size: 1.5rem;
+  padding: 5px;
+  color: white;
+}
