@@ -1,5 +1,17 @@
+@font-face {
+  font-family: "Heyam";
+  src: url("./assets/fonts/Heyam.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Blomberg";
+  src: url("./assets/fonts/Blomberg-8MKKZ.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Blomberg, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -7,6 +19,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary-color: #ca282c;
+  --primary-color: #963b3c;
+  --primary-color-light: #d37b7d;
   --secondary-color: #e89c1e;
+}
+body {
+  background-color: var(--primary-color);
 }

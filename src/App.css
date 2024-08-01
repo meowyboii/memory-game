@@ -1,5 +1,46 @@
 #root {
+  max-width: 1800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+}
+p {
+  color: var(--secondary-color);
+  font-size: 1.3rem;
+  margin: 0;
+}
+.cards {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+header {
+  position: relative;
+}
+#header-left {
+  color: var(--secondary-color);
+}
+#header-left h1 {
+  font-family: Heyam, sans-serif;
+  font-size: 4rem;
+  margin: 0;
+}
+#header-right {
+  position: absolute;
+  right: 0;
+  top: 10%;
+}
+@media (max-width: 800px) {
+  p {
+    font-size: 1rem;
+  }
+  #header-left h1 {
+    font-size: 3rem;
+  }
+  #header-right {
+    position: relative;
+  }
 }

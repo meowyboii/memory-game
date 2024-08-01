@@ -10,6 +10,10 @@ function App() {
     "Death Note",
     "Attack on Titan",
     "Demon Slayer",
+    "Beelzebub",
+    "Frieren",
+    "Solo Leveling",
+    "Dr. Stone",
   ];
 
   const [randomList, setRandomList] = useState([]);
@@ -85,7 +89,7 @@ function App() {
         throw new Error("No anime found for the given title.");
       }
       const id = animeData.data[0].id;
-      const poster = animeData.data[0].attributes.posterImage.small;
+      const poster = animeData.data[0].attributes.posterImage.medium;
 
       return { id, poster };
     } catch (error) {
@@ -100,19 +104,32 @@ function App() {
 
   return (
     <>
-      <span>
-        Best Score: {bestScore} Current Score: {score}
-      </span>
-      <div className="cards">
-        {randomList?.map((anime, index) => (
-          <Card
-            key={anime.id}
-            title={anime.title}
-            poster={anime.poster}
-            handleClick={() => handleClick(index)}
-          />
-        ))}
-      </div>
+      <header>
+        <div id="header-left">
+          <h1>Memory Game</h1>{" "}
+          <p>
+            Get points by clicking on an image but do not click on any more than
+            once!
+          </p>
+        </div>
+        <div id="header-right">
+          <p>Current Score: {score}</p>
+          <p>Best Score: {bestScore}</p>
+        </div>
+      </header>
+
+      <main className="cards">
+        {randomList.length > 0
+          ? randomList.map((anime, index) => (
+              <Card
+                key={anime.id}
+                title={anime.title}
+                poster={anime.poster}
+                handleClick={() => handleClick(index)}
+              />
+            ))
+          : animeList.map((anime, index) => <Card key={index} title={anime} />)}
+      </main>
     </>
   );
 }
